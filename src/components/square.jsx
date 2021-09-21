@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const Square = () => {
-  const [color, setColor] = useState('#1d1d1d')
+  const [color, setColor] = useState({ background: '#1d1d1d' })
 
   const randomInt = () => {
     const rendomInt = Math.floor(Math.random() * 255)
@@ -10,25 +10,19 @@ const Square = () => {
 
   const mouseOver = () => {
     const rgb = `rgb(${randomInt()},${randomInt()},${randomInt()})`
-    setColor(rgb)
+    setColor({
+      background: rgb,
+      boxShadow: `0 0 2px ${rgb}, 0 0 10px ${rgb}`
+    })
   }
   const mouseLeave = () => {
-    setColor('#1d1d1d')
+    setColor({ background: '#1d1d1d' })
   }
 
   return (
     <div
       className='square'
-      style={
-        color === '#1d1d1d'
-          ? {
-              background: `#1d1d1d`
-            }
-          : {
-              background: `${color}`,
-              boxShadow: `0 0 2px ${color}, 0 0 10px ${color}`
-            }
-      }
+      style={color}
       onMouseOver={mouseOver}
       onMouseLeave={mouseLeave}
     ></div>
